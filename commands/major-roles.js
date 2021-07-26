@@ -3,34 +3,34 @@ module.exports = {
   description: "Reaction roles for Majors",
   async execute(message, args, Discord, client) {
     const channel = process.env.DJS_REACTION_CHANNEL;
-    const roleCS = message.guild.roles.cache.find((role) => role.name === "cs");
-    const roleCIS = message.guild.roles.cache.find(
+    const csRole = message.guild.roles.cache.find((role) => role.name === "cs");
+    const cisRole = message.guild.roles.cache.find(
       (role) => role.name === "cis"
     );
-    const roleENGR = message.guild.roles.cache.find(
+    const engrRole = message.guild.roles.cache.find(
       (role) => role.name === "engineering"
     );
 
-    const emojiCS = "😀";
-    const emojiCIS = "😬";
-    const emojiENGR = "😱";
+    const csEmoji = "😀";
+    const cisEmoji = "😬";
+    const engrEmoji = "😱";
 
     let majorReactionRoleEmbed = new Discord.MessageEmbed()
       .setColor("#e42643")
       .setTitle("Select your Major and/or Minor")
       .setDescription(
         "By reacting to this message, you will be granted the specific role of CS, CIS, and/or ENGR and have access to their channels.\n\n" +
-          `${emojiCS} for Computer Science\n` +
-          `${emojiCIS} for CIS\n` +
-          `${emojiENGR} for Engineering`
+          `${csEmoji} for Computer Science\n` +
+          `${cisEmoji} for CIS\n` +
+          `${engrEmoji} for Engineering`
       );
 
     message.delete({ timeout: "2000" });
 
     let messageEmbed = await message.channel.send(majorReactionRoleEmbed);
-    messageEmbed.react(emojiCS);
-    messageEmbed.react(emojiCIS);
-    messageEmbed.react(emojiENGR);
+    messageEmbed.react(csEmoji);
+    messageEmbed.react(cisEmoji);
+    messageEmbed.react(engrEmoji);
 
     client.on("messageReactionAdd", async (reaction, user) => {
       if (reaction.message.partial) await reaction.message.fetch();
@@ -39,20 +39,20 @@ module.exports = {
       if (!reaction.message.guild) return;
 
       if (reaction.message.channel.id == channel) {
-        if (reaction.emoji.id === emojiCS) {
+        if (reaction.emoji.name === csEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(roleCS);
+            .roles.add(csRole);
         }
-        if (reaction.emoji.id === emojiCIS) {
+        if (reaction.emoji.name === cisEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(roleCIS);
+            .roles.add(cisRole);
         }
-        if (reaction.emoji.id === emojiENGR) {
+        if (reaction.emoji.name === engrEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.add(roleENGR);
+            .roles.add(engrRole);
         }
       } else {
         return;
@@ -66,20 +66,20 @@ module.exports = {
       if (!reaction.message.guild) return;
 
       if (reaction.message.channel.id == channel) {
-        if (reaction.emoji.id === emojiCS.id) {
+        if (reaction.emoji.name === csEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(roleCS);
+            .roles.remove(csRole);
         }
-        if (reaction.emoji.id === emojiCIS.id) {
+        if (reaction.emoji.name === cisEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(roleCIS);
+            .roles.remove(cisRole);
         }
-        if (reaction.emoji.id === emojiENGR.id) {
+        if (reaction.emoji.name === engrEmoji) {
           await reaction.message.guild.members.cache
             .get(user.id)
-            .roles.remove(roleENGR);
+            .roles.remove(engrRole);
         }
       } else {
         return;

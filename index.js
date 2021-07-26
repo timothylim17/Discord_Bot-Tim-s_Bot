@@ -28,17 +28,14 @@ client.on("message", (message) => {
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
-  // switch (command) {
-  //   case "major-roles":
-  //     client.commands
-  //       .get("major-roles")
-  //       .execute(message, args, Discord, client);
-  //     break;
-  //   default:
-  //     client.commands.get("notacommand").execute(message, args, Discord);
-  // }
-  if (command === "major-roles") {
-    client.commands.get("major-roles").execute(message, args, Discord, client);
+  switch (command) {
+    case "major-roles":
+      client.commands
+        .get("major-roles")
+        .execute(message, args, Discord, client);
+      break;
+    default:
+      client.commands.get("notacommand").execute(message, args, Discord);
   }
 });
 
