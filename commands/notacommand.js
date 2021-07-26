@@ -6,8 +6,8 @@ module.exports = {
       .setColor("#E53511")
       .setTitle(`${message} is not a command`)
       .addFields();
-  },
 
-  message.delete({ timeout: "1000" });
-  message.channel.send(msgEmbed);
+    message.delete({ timeout: "1000" });
+    message.channel.send(msgEmbed);
+  },
 };
