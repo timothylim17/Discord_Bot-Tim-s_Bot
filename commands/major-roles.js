@@ -25,7 +25,7 @@ module.exports = {
           `${engrEmoji} for Engineering`
       );
 
-    message.delete({ timeout: "2000" });
+    message.delete({ timeout: "1000" });
 
     let messageEmbed = await message.channel.send(majorReactionRoleEmbed);
     messageEmbed.react(csEmoji);

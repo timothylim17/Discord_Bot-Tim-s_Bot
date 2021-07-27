@@ -28,11 +28,56 @@ client.on("message", (message) => {
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
+  const channel = process.env.DJS_REACTION_CHANNEL;
+
   switch (command) {
     case "major-roles":
-      client.commands
-        .get("major-roles")
-        .execute(message, args, Discord, client);
+      if (
+        message.channel.id == channel &&
+        message.member.hasPermission("ADMINISTRATOR")
+      ) {
+        client.commands
+          .get("major-roles")
+          .execute(message, args, Discord, client);
+      } else {
+        client.commands.get("access-Denied").execute(message, args, Discord);
+      }
+      break;
+    case "cs-class-roles":
+      if (
+        message.channel.id == channel &&
+        message.member.hasPermission("ADMINISTRATOR")
+      ) {
+        client.commands
+          .get("cs-class-roles")
+          .execute(message, args, Discord, client);
+      } else {
+        client.commands.get("access-Denied").execute(message, args, Discord);
+      }
+      break;
+    case "engr-class-roles":
+      if (
+        message.channel.id == channel &&
+        message.member.hasPermission("ADMINISTRATOR")
+      ) {
+        client.commands
+          .get("engr-class-roles")
+          .execute(message, args, Discord, client);
+      } else {
+        client.commands.get("access-Denied").execute(message, args, Discord);
+      }
+      break;
+    case "misc-roles":
+      if (
+        message.channel.id == channel &&
+        message.member.hasPermission("ADMINISTRATOR")
+      ) {
+        client.commands
+          .get("misc-roles")
+          .execute(message, args, Discord, client);
+      } else {
+        client.commands.get("access-Denied").execute(message, args, Discord);
+      }
       break;
     default:
       client.commands.get("notacommand").execute(message, args, Discord);
