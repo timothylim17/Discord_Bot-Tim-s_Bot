@@ -1,85 +1,4 @@
-module.exports = {
-  name: "cs-class-roles",
-  description: "Reaction roles for CS Classes",
-  async execute(message, args, Discord, client) {
-    const roles = getCSRoles(message);
-    const emojis = getCSEmojis();
-    const roleNames = [
-      "cs120",
-      "cs125",
-      "cs160",
-      "cs230",
-      "cs260",
-      "cs290",
-      "cs315",
-      "cs325",
-      "cs360",
-      "cs363",
-      "cs430",
-      "cs432",
-      "cs440",
-      "cs452",
-      "cs465",
-      "cs470",
-      "cs480",
-      "cs484",
-      "cs491",
-      "cs495",
-    ];
-
-    let descriptionEmbed =
-      "By reacting to this message, you will recieve access to the channel of the corresponding class\n\n";
-
-    for (let i = 0; i < emojis.length; i++) {
-      descriptionEmbed += `${emojis[i]} for ${roleNames[i]}\n`;
-    }
-
-    let csReactionRoleEmbed = new Discord.MessageEmbed()
-      .setColor("#37718E")
-      .setTitle("Select your CS classes")
-      .setDescription(descriptionEmbed);
-
-    message.delete({ timeout: "1000" });
-
-    let messageEmbed = await message.channel.send(csReactionRoleEmbed);
-    for (let i = 0; i < emojis.length; i++) {
-      messageEmbed.react(emojis[i]);
-    }
-
-    client.on("messageReactionAdd", async (reaction, user) => {
-      if (reaction.message.partial) await reaction.message.fetch();
-      if (reaction.partial) await reaction.fetch();
-      if (user.bot) return;
-      if (!reaction.message.guild) return;
-
-      for (let i = 0; i < emojis.length; i++) {
-        if (reaction.emoji.name === emojis[i]) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.add(roles[i]);
-        }
-      }
-    });
-
-    client.on("messageReactionRemove", async (reaction, user) => {
-      if (reaction.message.partial) await reaction.message.fetch();
-      if (reaction.partial) await reaction.fetch();
-      if (user.bot) return;
-      if (!reaction.message.guild) return;
-
-      for (let i = 0; i < emojis.length; i++) {
-        if (reaction.emoji.name === emojis[i]) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.remove(roles[i]);
-        }
-      }
-    });
-  },
-};
-
-//? TODO: Try to find a way to import instead of this
-var getCSRoles = function (message) {
+export var getCSRoles = function (message) {
   const cs120Role = message.guild.roles.cache.find(
     (role) => role.name === "cs120"
   );
@@ -167,7 +86,7 @@ var getCSRoles = function (message) {
   return roles;
 };
 
-var getCSEmojis = function () {
+export var getCSEmojis = function () {
   const cs120Emoji = "😀";
   const cs125Emoji = "😁";
   const cs160Emoji = "😆";

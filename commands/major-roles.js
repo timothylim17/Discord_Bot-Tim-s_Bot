@@ -16,7 +16,7 @@ module.exports = {
     const engrEmoji = "😱";
 
     let majorReactionRoleEmbed = new Discord.MessageEmbed()
-      .setColor("#e42643")
+      .setColor("#F0CC1E")
       .setTitle("Select your Major and/or Minor")
       .setDescription(
         "By reacting to this message, you will be granted the specific role of CS, CIS, and/or ENGR and have access to their channels.\n\n" +

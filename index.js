@@ -12,6 +12,7 @@ client.commands = new Discord.Collection();
 const commandFiles = fs
   .readdirSync("./commands/")
   .filter((file) => file.endsWith(".js"));
+
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
 
@@ -30,57 +31,40 @@ client.on("message", (message) => {
 
   const channel = process.env.DJS_REACTION_CHANNEL;
 
-  switch (command) {
-    case "major-roles":
-      if (
-        message.channel.id == channel &&
-        message.member.hasPermission("ADMINISTRATOR")
-      ) {
+  if (
+    message.channel.id == channel &&
+    message.member.hasPermission("ADMINISTRATOR")
+  ) {
+    switch (command) {
+      case "major-roles":
         client.commands
           .get("major-roles")
           .execute(message, args, Discord, client);
-      } else {
-        client.commands.get("access-Denied").execute(message, args, Discord);
-      }
-      break;
-    case "cs-class-roles":
-      if (
-        message.channel.id == channel &&
-        message.member.hasPermission("ADMINISTRATOR")
-      ) {
+        break;
+
+      case "cs-class-roles":
         client.commands
           .get("cs-class-roles")
           .execute(message, args, Discord, client);
-      } else {
-        client.commands.get("access-Denied").execute(message, args, Discord);
-      }
-      break;
-    case "engr-class-roles":
-      if (
-        message.channel.id == channel &&
-        message.member.hasPermission("ADMINISTRATOR")
-      ) {
+        break;
+
+      case "engr-class-roles":
         client.commands
           .get("engr-class-roles")
           .execute(message, args, Discord, client);
-      } else {
-        client.commands.get("access-Denied").execute(message, args, Discord);
-      }
-      break;
-    case "misc-roles":
-      if (
-        message.channel.id == channel &&
-        message.member.hasPermission("ADMINISTRATOR")
-      ) {
+        break;
+
+      case "misc-roles":
         client.commands
           .get("misc-roles")
           .execute(message, args, Discord, client);
-      } else {
-        client.commands.get("access-Denied").execute(message, args, Discord);
-      }
-      break;
-    default:
-      client.commands.get("notacommand").execute(message, args, Discord);
+        break;
+
+      case "nuke-this-channel":
+        client.commands.get("nuke-this-channel").execute(message, args);
+    }
+  } else {
+    client.commands.get("access-Denied").execute(message, args, Discord);
   }
 });
 
