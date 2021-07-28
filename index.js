@@ -62,6 +62,14 @@ client.on("message", (message) => {
 
       case "nuke-this-channel":
         client.commands.get("nuke-this-channel").execute(message, args);
+        break;
+
+      case "tim-help":
+        client.commands.get("tim-help").execute(message, args, Discord, client);
+        break;
+
+      default:
+        client.commands.get("not-a-command").execute(message, args, Discord);
     }
   } else {
     client.commands.get("access-Denied").execute(message, args, Discord);

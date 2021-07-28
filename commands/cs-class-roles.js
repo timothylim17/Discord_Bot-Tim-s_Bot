@@ -4,28 +4,7 @@ module.exports = {
   async execute(message, args, Discord, client) {
     const roles = getCSRoles(message);
     const emojis = getCSEmojis();
-    const roleNames = [
-      "cs120",
-      "cs125",
-      "cs160",
-      "cs230",
-      "cs260",
-      "cs290",
-      "cs315",
-      "cs325",
-      "cs360",
-      "cs363",
-      "cs430",
-      "cs432",
-      "cs440",
-      "cs452",
-      "cs465",
-      "cs470",
-      "cs480",
-      "cs484",
-      "cs491",
-      "cs495",
-    ];
+    const roleNames = getCSRoleNames();
 
     let descriptionEmbed =
       "By reacting to this message, you will recieve access to the channel of the corresponding class\n\n";
@@ -35,7 +14,7 @@ module.exports = {
     }
 
     let csReactionRoleEmbed = new Discord.MessageEmbed()
-      .setColor("#37718E")
+      .setColor("#e6e6fa")
       .setTitle("Select your CS classes")
       .setDescription(descriptionEmbed);
 
@@ -141,7 +120,7 @@ var getCSRoles = function (message) {
     (role) => role.name === "cs495"
   );
 
-  const roles = [
+  const roleArray = [
     cs120Role,
     cs125Role,
     cs160Role,
@@ -164,7 +143,7 @@ var getCSRoles = function (message) {
     cs495Role,
   ];
 
-  return roles;
+  return roleArray;
 };
 
 var getCSEmojis = function () {
@@ -189,7 +168,7 @@ var getCSEmojis = function () {
   const cs491Emoji = "💀";
   const cs495Emoji = "☠️";
 
-  const emojis = [
+  const emojiArray = [
     cs120Emoji,
     cs125Emoji,
     cs160Emoji,
@@ -212,5 +191,32 @@ var getCSEmojis = function () {
     cs495Emoji,
   ];
 
-  return emojis;
+  return emojiArray;
+};
+
+var getCSRoleNames = function () {
+  const roleArray = [
+    "cs120",
+    "cs125",
+    "cs160",
+    "cs230",
+    "cs260",
+    "cs290",
+    "cs315",
+    "cs325",
+    "cs360",
+    "cs363",
+    "cs430",
+    "cs432",
+    "cs440",
+    "cs452",
+    "cs465",
+    "cs470",
+    "cs480",
+    "cs484",
+    "cs491",
+    "cs495",
+  ];
+
+  return roleArray;
 };

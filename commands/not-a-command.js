@@ -1,5 +1,5 @@
 module.exports = {
-  name: "notacommand",
+  name: "not-a-command",
   description: "When someone puts an unexisting command, this will run",
   execute(message, args, Discord) {
     const msgEmbed = new Discord.MessageEmbed()
