@@ -65,7 +65,9 @@ client.on("message", (message) => {
         break;
 
       case "tim-help":
-        client.commands.get("tim-help").execute(message, args, Discord, client);
+        client.commands
+          .get("tim-help")
+          .execute(message, args, Discord, client, fs);
         break;
 
       default:

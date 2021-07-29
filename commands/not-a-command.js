@@ -4,9 +4,9 @@ module.exports = {
   execute(message, args, Discord) {
     const msgEmbed = new Discord.MessageEmbed()
       .setColor("#E53511")
-      .setTitle(`${message} is not a command`);
+      .setTitle(`${message} is not a command`)
+      .setDescription("Please run **!tim-help** get a list of the commands.");
 
-    message.delete({ timeout: "1000" });
     message.channel.send(msgEmbed);
   },
 };
