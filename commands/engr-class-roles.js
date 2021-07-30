@@ -122,20 +122,20 @@ var getENGRRoles = function (message) {
 };
 
 var getENGREmojis = function () {
-  const engr150 = "😀";
-  const engr210 = "😆";
-  const engr215 = "😅";
-  const engr240 = "🤣";
-  const engr245 = "😇";
-  const engr271 = "🙃";
-  const engr310 = "🥰";
-  const engr325 = "😛";
-  const engr340 = "🧐";
-  const engr345 = "😎";
-  const engr420 = "🥳";
-  const engr470 = "😞";
-  const engr480 = "💀";
-  const engr491 = "☠️";
+  const engr150 = "😃";
+  const engr210 = "😉";
+  const engr215 = "😍";
+  const engr240 = "😗";
+  const engr245 = "😋";
+  const engr271 = "🤪";
+  const engr310 = "🤨";
+  const engr325 = "🤓";
+  const engr340 = "😏";
+  const engr345 = "😟";
+  const engr420 = "😣";
+  const engr470 = "😫";
+  const engr480 = "🥺";
+  const engr491 = "😤";
 
   const emojiArray = [
     engr150,
