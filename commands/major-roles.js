@@ -11,9 +11,9 @@ module.exports = {
       (role) => role.name === "engineering"
     );
 
-    const csEmoji = "😀";
-    const cisEmoji = "😬";
-    const engrEmoji = "😱";
+    const csEmoji = client.emojis.cache.get("870743617420025946");
+    const cisEmoji = client.emojis.cache.get("755563615712575558");
+    const engrEmoji = client.emojis.cache.get("755563811544498207");
 
     let majorReactionRoleEmbed = new Discord.MessageEmbed()
       .setColor("#F0CC1E")
@@ -39,17 +39,17 @@ module.exports = {
       if (!reaction.message.guild) return;
 
       if (reaction.message.channel.id == channel) {
-        if (reaction.emoji.name === csEmoji) {
+        if (reaction.emoji.id === csEmoji.id) {
           await reaction.message.guild.members.cache
             .get(user.id)
             .roles.add(csRole);
         }
-        if (reaction.emoji.name === cisEmoji) {
+        if (reaction.emoji.id === cisEmoji.id) {
           await reaction.message.guild.members.cache
             .get(user.id)
             .roles.add(cisRole);
         }
-        if (reaction.emoji.name === engrEmoji) {
+        if (reaction.emoji.id === engrEmoji.id) {
           await reaction.message.guild.members.cache
             .get(user.id)
             .roles.add(engrRole);
@@ -66,17 +66,17 @@ module.exports = {
       if (!reaction.message.guild) return;
 
       if (reaction.message.channel.id == channel) {
-        if (reaction.emoji.name === csEmoji) {
+        if (reaction.emoji.id === csEmoji.id) {
           await reaction.message.guild.members.cache
             .get(user.id)
             .roles.remove(csRole);
         }
-        if (reaction.emoji.name === cisEmoji) {
+        if (reaction.emoji.id === cisEmoji.id) {
           await reaction.message.guild.members.cache
             .get(user.id)
             .roles.remove(cisRole);
         }
-        if (reaction.emoji.name === engrEmoji) {
+        if (reaction.emoji.id === engrEmoji.id) {
           await reaction.message.guild.members.cache
             .get(user.id)
             .roles.remove(engrRole);
