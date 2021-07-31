@@ -2,6 +2,7 @@ module.exports = {
   name: "misc-roles",
   description: "Reaction roles for misc roles",
   async execute(message, args, Discord, client) {
+    const channel = process.env.DJS_REACTION_CHANNEL;
     const roles = getRoles(message);
     const emojis = getEmojis(client);
     const roleNames = getRoleNames();
@@ -31,12 +32,16 @@ module.exports = {
       if (user.bot) return;
       if (!reaction.message.guild) return;
 
-      for (let i = 0; i < emojis.length; i++) {
-        if (reaction.emoji.id === emojis[i].id) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.add(roles[i]);
+      if (reaction.message.channel.id == channel) {
+        for (let i = 0; i < emojis.length; i++) {
+          if (reaction.emoji.id === emojis[i].id) {
+            await reaction.message.guild.members.cache
+              .get(user.id)
+              .roles.add(roles[i]);
+          }
         }
+      } else {
+        return;
       }
     });
 
@@ -46,12 +51,16 @@ module.exports = {
       if (user.bot) return;
       if (!reaction.message.guild) return;
 
-      for (let i = 0; i < emojis.length; i++) {
-        if (reaction.emoji.id === emojis[i].id) {
-          await reaction.message.guild.members.cache
-            .get(user.id)
-            .roles.remove(roles[i]);
+      if (reaction.message.channel.id == channel) {
+        for (let i = 0; i < emojis.length; i++) {
+          if (reaction.emoji.id === emojis[i].id) {
+            await reaction.message.guild.members.cache
+              .get(user.id)
+              .roles.remove(roles[i]);
+          }
         }
+      } else {
+        return;
       }
     });
   },
