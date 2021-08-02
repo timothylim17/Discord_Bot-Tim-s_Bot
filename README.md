@@ -4,7 +4,7 @@ This bot is for Role Management in a Discord Server in which I am part of. Our D
 In this server, we have channels for most of the classes and it is just a place for us to hang out and get help for classes. Before, we, the admins, had to manually 
 put the roles of each person to give them access to the channels.
 
-## Installation
+## Package Used
 ```bash
 $ npm install discord.js
 ```
