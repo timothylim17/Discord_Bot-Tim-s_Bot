@@ -10,7 +10,7 @@ $ npm install discord.js
 ```
 
 ## Images of Embeds
-![Misc Role Reactions](images/Misc_Role_Reaction.png)
-![Major Role Reactions](images/Major_Role_Reaction.png)
-![CS Class Role Reaction](images/CS_Class_Role_Reaction.png)
-![ENGR_Class_Role_Reaction](images/ENGR_Class_Role_Reaction.png)
+![Misc Role Reactions](images/Misc_Role_Reaction.PNG)
+![Major Role Reactions](images/Major_Role_Reaction.PNG)
+![CS Class Role Reaction](images/CS_Class_Role_Reaction.PNG)
+![ENGR_Class_Role_Reaction](images/ENGR_Class_Role_Reaction.PNG)
