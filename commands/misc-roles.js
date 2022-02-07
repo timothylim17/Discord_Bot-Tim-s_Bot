@@ -83,6 +83,12 @@ var getRoles = function (message) {
   const weebRole = message.guild.roles.cache.find(
     (role) => role.name === "weeb"
   );
+  const chapelRole = message.guild.roles.cache.find(
+    (role) => role.name === "chapel"
+  );
+  const symptomTracker = message.guild.roles.cache.find(
+    (role) => role.name === "symptom-tracker"
+  );
 
   const roleArray = [
     apuRole,
@@ -91,6 +97,8 @@ var getRoles = function (message) {
     mcRole,
     genshinRole,
     weebRole,
+    chapelRole,
+    symptomTracker,
   ];
 
   return roleArray;
@@ -103,6 +111,8 @@ var getEmojis = function (client) {
   const mcEmoji = client.emojis.cache.get("870043811668193380");
   const genshinEmoji = client.emojis.cache.get("870043696408707073");
   const weebEmoji = client.emojis.cache.get("870046227302068254");
+  const chapelEmoji = client.emojis.cache.get("940304040837939230");
+  const symptomTrackerEmoji = client.emojis.cache.get("940303793176870955");
 
   const emojiArray = [
     apuEmoji,
@@ -111,6 +121,8 @@ var getEmojis = function (client) {
     mcEmoji,
     genshinEmoji,
     weebEmoji,
+    chapelEmoji,
+    symptomTrackerEmoji,
   ];
 
   return emojiArray;
@@ -124,6 +136,8 @@ var getRoleNames = function () {
     "minecraft",
     "genshin",
     "weeb",
+    "chapel",
+    "symptom-tracker",
   ];
 
   return roleNameArray;

@@ -4,26 +4,33 @@ module.exports = {
   async execute(message, args, Discord, client) {
     const channel = process.env.DJS_REACTION_CHANNEL;
     const roles = getCSRoles(message);
-    const emojis = getCSEmojis();
+    const emojis = getCSEmojis(client);
     const roleNames = getCSRoleNames();
-
-    let descriptionEmbed =
-      "By reacting to this message, you will recieve access to the channel of the corresponding class\n\n";
-
-    for (let i = 0; i < emojis.length; i++) {
-      descriptionEmbed += `${emojis[i]} for ${roleNames[i]}\n`;
-    }
-
-    let csReactionRoleEmbed = new Discord.MessageEmbed()
-      .setColor("#e6e6fa")
-      .setTitle("Select your CS classes")
-      .setDescription(descriptionEmbed);
 
     message.delete({ timeout: "1000" });
 
-    let messageEmbed = await message.channel.send(csReactionRoleEmbed);
-    for (let i = 0; i < emojis.length; i++) {
-      messageEmbed.react(emojis[i]);
+    let i,j, chunk = 20;
+    for (i = 0,j = emojis.length; i < j; i += chunk) {
+
+      let emotesSubArr = emojis.slice(i, i + chunk);
+      let roleNamesSubArr = roleNames.slice(i, i + chunk);
+
+      let descriptionEmbed =
+        "By reacting to this message, you will recieve access to the channel of the corresponding role\n\n";
+
+      for (let i = 0; i < emotesSubArr.length; i++) {
+        descriptionEmbed += `${emotesSubArr[i]} for ${roleNamesSubArr[i]}\n`;
+      }
+
+      let miscReactionRoleEmbed = new Discord.MessageEmbed()
+        .setColor("#e6e6fa")
+        .setTitle("Select your CS classes")
+        .setDescription(descriptionEmbed);
+
+      let messageEmbed = await message.channel.send(miscReactionRoleEmbed);
+      for (let i = 0; i < emotesSubArr.length; i++) {
+        messageEmbed.react(emotesSubArr[i]);
+      }
     }
 
     client.on("messageReactionAdd", async (reaction, user) => {
@@ -33,8 +40,9 @@ module.exports = {
       if (!reaction.message.guild) return;
 
       if (reaction.message.channel.id == channel) {
+        console.log(reaction.emoji.name);
         for (let i = 0; i < emojis.length; i++) {
-          if (reaction.emoji.name === emojis[i]) {
+          if (reaction.emoji.name === emojis[i] || reaction.emoji.id === emojis[i].id) {
             await reaction.message.guild.members.cache
               .get(user.id)
               .roles.add(roles[i]);
@@ -53,7 +61,7 @@ module.exports = {
 
       if (reaction.message.channel.id == channel) {
         for (let i = 0; i < emojis.length; i++) {
-          if (reaction.emoji.name === emojis[i]) {
+          if (reaction.emoji.name === emojis[i] || reaction.emoji.id === emojis[i].id) {
             await reaction.message.guild.members.cache
               .get(user.id)
               .roles.remove(roles[i]);
@@ -128,6 +136,9 @@ var getCSRoles = function (message) {
   const cs495Role = message.guild.roles.cache.find(
     (role) => role.name === "cs495"
   );
+  const cs496Role = message.guild.roles.cache.find(
+    (role) => role.name === "cs496"
+  );
 
   const roleArray = [
     cs120Role,
@@ -150,12 +161,13 @@ var getCSRoles = function (message) {
     cs484Role,
     cs491Role,
     cs495Role,
+    cs496Role,
   ];
 
   return roleArray;
 };
 
-var getCSEmojis = function () {
+var getCSEmojis = function (client) {
   const cs120Emoji = "😀";
   const cs125Emoji = "😁";
   const cs160Emoji = "😆";
@@ -176,6 +188,7 @@ var getCSEmojis = function () {
   const cs484Emoji = "😞";
   const cs491Emoji = "💀";
   const cs495Emoji = "☠️";
+  const cs496Emoji = client.emojis.cache.get("940303139649781810");
 
   const emojiArray = [
     cs120Emoji,
@@ -198,6 +211,7 @@ var getCSEmojis = function () {
     cs484Emoji,
     cs491Emoji,
     cs495Emoji,
+    cs496Emoji,
   ];
 
   return emojiArray;
@@ -225,6 +239,7 @@ var getCSRoleNames = function () {
     "cs484",
     "cs491",
     "cs495",
+    "cs496",
   ];
 
   return roleArray;
